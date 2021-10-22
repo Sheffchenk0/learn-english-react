@@ -1,0 +1,13 @@
+.title {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.inline {
+    margin-left: 0px;
+}
+
+.inline__element {
+    display: inline-block;
+    margin-right: 20px;
+}

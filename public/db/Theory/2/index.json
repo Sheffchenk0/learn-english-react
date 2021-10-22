@@ -1,0 +1,22 @@
+{
+    "type": 1,
+    "item": {
+        "title": "Present Simple",
+        "h2": "Вставьте пропущенные слова",
+        "tests": [{
+            "text__before": "He",
+            "text__after": "school every day",
+            "answers": [{ "title": "go", "isRight": false }, { "title": "goes", "isRight": true }, { "title": "did", "isRight": false }]
+        }, {
+            "text__before": "He",
+            "text__after": "school every day",
+            "answers": [{ "title": "go", "isRight": false }, { "title": "goes", "isRight": true }, { "title": "did", "isRight": false }]
+        }, {
+            "text__before": "He",
+            "text__after": "school every day",
+            "answers": [{ "title": "go", "isRight": false }, { "title": "goes", "isRight": true }, { "title": "did", "isRight": false }]
+        }]
+    },
+    "count": 5
+
+}
