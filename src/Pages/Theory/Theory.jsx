@@ -5,41 +5,58 @@ import Header from '../../Components/Header/Header';
 import TestContainer from './TestContainer/TestContainer';
 import styles from './Theory.module.css';
 import { useSelector } from 'react-redux';
-import { getTheory } from '../../redux/reducers';
+import { getTheory, checkAnswers, setFinishPage } from '../../redux/reducers';
 import { useDispatch } from 'react-redux';
 
 const Theory = () => {
-  const { theory, page, count, type, acceptPages } = useSelector((state) => ({
+  const { theory, page, count, pagesFinish, answers } = useSelector((state) => ({
     theory: state.theory,
     page: state.page,
     count: state.count,
-    type: state.type,
-    acceptPages: state.acceptPages,
+    pagesFinish: state.pagesFinish,
+    answers: state.theory[state.page]?.answers,
   }));
   const [validation, setValidation] = useState([]);
+  console.log(validation);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getTheory(page + 1));
-  }, [page]);
+    if (!theory[page]) {
+      dispatch(getTheory(page + 1));
+    } else if (theory[page]?.type === 1) {
+      setValidation([]);
+    }
+  }, [page, theory]);
+  const onSubmit = () => {
+    dispatch(checkAnswers(page, validation));
+  };
   return (
     <>
-      {(theory && (
-        <div className={styles.container}>
-          <Header count={theory.count} page={page} acceptPages={acceptPages} />
-          <div className={styles.content}>
-            {theory.type === 0 && <TheoryElement theory={theory.item} styles={styles} />}
-            {theory.type === 1 && (
-              <TestContainer
-                validation={validation}
-                setValidation={setValidation}
-                test={theory.item}
-              />
-            )}
-          </div>
-          <Footer page={page} count={count} type={type} />
+      <div className={styles.container}>
+        <Header
+          count={theory[page]?.count}
+          page={page}
+          setFinishPage={setFinishPage}
+          pagesFinish={pagesFinish}
+        />
+        <div className={styles.content}>
+          {theory[page]?.type === 0 && <TheoryElement theory={theory[page].item} styles={styles} />}
+          {theory[page]?.type === 1 && (
+            <TestContainer
+              validation={validation}
+              setValidation={setValidation}
+              test={theory[page]?.item}
+              answers={answers}
+            />
+          )}
         </div>
-      )) ||
-        404}
+        <Footer
+          isAnswers={answers?.length}
+          onSubmit={onSubmit}
+          page={page}
+          count={count}
+          type={theory[page]?.type}
+        />
+      </div>
     </>
   );
 };

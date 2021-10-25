@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setPage } from '../../redux/reducers';
 import styles from './Pagination.module.css';
 
-const Pagination = ({ count = 0, page, acceptPages }) => {
+const Pagination = ({ count = 0, page, pagesFinish }) => {
   const dispatch = useDispatch();
   const onClick = (id) => {
     dispatch(setPage(id));
@@ -12,6 +12,7 @@ const Pagination = ({ count = 0, page, acceptPages }) => {
   return (
     <div className={styles.pagination}>
       {Array.from({ length: count }).map((el, index) => {
+        let pageStatus = pagesFinish[index]?.isRight;
         return (
           <div
             onClick={() => {
@@ -20,7 +21,8 @@ const Pagination = ({ count = 0, page, acceptPages }) => {
             key={index}
             className={classNames(styles.dot, {
               [styles.active]: page === index,
-              [styles.complete]: acceptPages.includes(index),
+              [styles.complete]: pageStatus === true,
+              [styles.wrong]: pageStatus === false,
             })}>
             {index + 1}
           </div>

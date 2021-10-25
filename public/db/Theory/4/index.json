@@ -1,0 +1,22 @@
+{
+    "type": 1,
+    "item": {
+        "title": "Present Continuous",
+        "h2": "Вставьте пропущенные слова",
+        "tests": [{
+            "text__before": "She is",
+            "text__after": "now",
+            "answers": [{ "title": "play", "isRight": false }, { "title": "playing", "isRight": true }, { "title": "played", "isRight": false }]
+        }, {
+            "text__before": "",
+            "text__after": "they walking now?",
+            "answers": [{ "title": "Are", "isRight": true }, { "title": "Is", "isRight": false }, { "title": "Am", "isRight": false }]
+        }, {
+            "text__before": "I am",
+            "text__after": "working",
+            "answers": [{ "title": "not", "isRight": true }, { "title": "do not", "isRight": false }, { "title": "did not", "isRight": false }]
+        }]
+    },
+    "count": 5
+
+}

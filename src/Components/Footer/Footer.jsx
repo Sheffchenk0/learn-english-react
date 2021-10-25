@@ -4,9 +4,10 @@ import { setPage } from '../../redux/reducers';
 import Button from '../Button/Button';
 import styles from './Footer.module.css';
 
-const Footer = ({ page, count, type }) => {
+const Footer = ({ page, count, type, onSubmit, isAnswers }) => {
   const dispatch = useDispatch();
   const onNext = () => {
+    console.log(page, count);
     if (page + 1 < count) {
       console.log(11);
       dispatch(setPage(page + 1));
@@ -24,7 +25,11 @@ const Footer = ({ page, count, type }) => {
           Назад
         </Button>
       )}
-      {type === 1 && <Button className="button--green button--small">Проверить</Button>}
+      {type === 1 && !isAnswers && (
+        <Button onClick={onSubmit} className="button--green button--small">
+          Проверить
+        </Button>
+      )}
       {page + 1 !== count && (
         <Button onClick={onNext} className="button--green button--small">
           Вперёд

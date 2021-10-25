@@ -5,5 +5,10 @@ const instance = axios.create({
 });
 
 export const getTheoryById = (id) => {
-  return instance.get(`/Theory/${id}/index.json`).then((res) => res.data);
+  return instance.get(`/Theory/${id}/index.json`).then(
+    (res) => res.data,
+    (er) => {
+      throw er;
+    },
+  );
 };
